@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { FiUpload, FiFile, FiCheck, FiX, FiBriefcase, FiArrowLeft, FiLoader, FiInfo } from "react-icons/fi";
 import apiClient from "../utils/apiClient";
 
