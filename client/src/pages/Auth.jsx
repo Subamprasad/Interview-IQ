@@ -31,7 +31,7 @@ function Auth() {
       toast.success(isLogin ? "Login successful." : "Registration successful.", { icon: '🚀' });
       navigate("/dashboard");
     } catch (err) {
-      const msg = err.response?.data?.message || "Biometric match failed. Access denied.";
+      const msg = err.response?.data?.message || "Authentication failed. Please try again.";
       toast.error(msg, { icon: '❌' });
 
       // Resilient Dev Shortcut
