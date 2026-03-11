@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary: #0ea5e9;
+  --accent: #f43f5e;
+  --bg-dark: #020617;
+  --glass: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@theme {
+  --font-sans: var(--font-sans);
+  --color-primary: var(--primary);
+  --color-glass: var(--glass);
+}
+
+@layer base {
+  body {
+    @apply bg-[#020617] text-white selection:bg-indigo-500/30;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+
+  .glass,
+  .glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    @apply rounded-[2.5rem] p-8 shadow-2xl transition-all duration-500;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/40;
+  }
+
+  .bg-mesh {
+    background-color: #020617;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-white/5;
+  }
+
+  .skeleton::after {
+    @apply absolute inset-0;
+    content: "";
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .waveform-container {
+    @apply flex items-center gap-1 h-8;
+  }
+
+  .waveform-bar {
+    @apply w-1 bg-indigo-500 rounded-full transition-all duration-300;
+    animation: waveform-pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes waveform-pulse {
+
+    0%,
+    100% {
+      height: 20%;
+      opacity: 0.5;
+    }
+
+    50% {
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+}
+
+/* Custom Toast Styling */
+.toast-glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  @apply !bg-slate-900/80 !text-white !border-white/10 !rounded-2xl !px-6 !py-4 !shadow-2xl;
+}
