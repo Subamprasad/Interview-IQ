@@ -28,7 +28,7 @@ function Auth() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      toast.success(isLogin ? "Neural uplink established." : "Strategic account registered.", { icon: '🚀' });
+      toast.success(isLogin ? "Login successful." : "Registration successful.", { icon: '🚀' });
       navigate("/dashboard");
     } catch (err) {
       const msg = err.response?.data?.message || "Biometric match failed. Access denied.";
@@ -66,7 +66,7 @@ function Auth() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      toast.success("Strategic Neural Uplink Synced.", { icon: '🌐' });
+      toast.success("Google Login Successful.", { icon: '🌐' });
       navigate("/dashboard");
     } catch (err) {
       toast.error("Uplink synchronization failed.");
@@ -77,7 +77,7 @@ function Auth() {
     // Use the email entered in the form, or fall back to a demo identity
     const simulatedEmail = email || "subamprasad4311@gmail.com";
     const simulatedName = name || "Subam Prasad";
-    toast.loading("Simulating Elite Google Authentication...", { duration: 2000 });
+    toast.loading("Simulating Google Authentication...", { duration: 2000 });
     setTimeout(() => {
       executeGoogleLogin(simulatedName, simulatedEmail, "sim_google_" + Date.now(), "https://ui-avatars.com/api/?name=" + simulatedName + "&background=6366f1&color=fff");
     }, 2000);
@@ -88,7 +88,7 @@ function Auth() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-500/5 rounded-full blur-[140px] -z-10 animate-pulse" />
 
       <Link to="/" className="absolute top-10 left-10 inline-flex items-center gap-3 text-slate-500 hover:text-white transition-all font-black uppercase tracking-widest text-[10px] glass px-4 py-2 rounded-xl group">
-        <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" /> Arena Entry
+        <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" /> Back to Home
       </Link>
 
       <motion.div
@@ -101,9 +101,9 @@ function Auth() {
             <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6 text-indigo-400 border border-white/10 group-hover:rotate-6 transition-transform">
               {isLogin ? <FiShield size={32} /> : <FiCpu size={32} />}
             </div>
-            <h2 className="text-4xl font-black mb-3 uppercase tracking-tighter">{isLogin ? "Uplink Session" : "Account Synthesis"}</h2>
+            <h2 className="text-4xl font-black mb-3 uppercase tracking-tighter">{isLogin ? "Login" : "Register"}</h2>
             <p className="text-slate-500 font-bold uppercase tracking-[0.2em] text-[10px]">
-              {isLogin ? "Authorize for adaptive simulation" : "Register for elite performance audits"}
+              {isLogin ? "Sign in to your account" : "Create a new account"}
             </p>
           </header>
 
@@ -122,7 +122,7 @@ function Auth() {
             </div>
             <div className="flex items-center gap-4 py-2">
               <div className="h-px bg-white/10 flex-1" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">OR Neural Link</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">OR EMAIL</span>
               <div className="h-px bg-white/10 flex-1" />
             </div>
           </div>
@@ -160,7 +160,7 @@ function Auth() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="identity@neural.com"
+                  placeholder="Email Address"
                   className="w-full pl-16 pr-6 py-5 rounded-[1.75rem] bg-white/5 border border-white/10 focus:border-indigo-500/40 outline-none transition-all font-semibold text-sm"
                   required
                 />
@@ -191,7 +191,7 @@ function Auth() {
                 <FiLoader className="animate-spin text-2xl" />
               ) : (
                 <>
-                  {isLogin ? "Establish Session" : "Synthesize Account"}
+                  {isLogin ? "Login" : "Register"}
                 </>
               )}
             </button>
@@ -199,13 +199,13 @@ function Auth() {
 
           <footer className="mt-10 text-center">
             <p className="text-slate-500 font-bold uppercase tracking-[0.1em] text-[10px]">
-              {isLogin ? "First time in the arena? " : "Already authenticated? "}
+              {isLogin ? "Don't have an account? " : "Already have an account? "}
               <button
                 type="button"
                 onClick={() => { setIsLogin(!isLogin); }}
                 className="text-indigo-400 hover:text-indigo-300 transition-colors font-black ml-1"
               >
-                {isLogin ? "Join the Elite" : "Return to Uplink"}
+                {isLogin ? "Sign Up" : "Login"}
               </button>
             </p>
           </footer>
