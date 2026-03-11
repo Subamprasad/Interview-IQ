@@ -31,8 +31,8 @@ const Navbar = () => {
             <a href="#pricing" className="hover:text-indigo-400 transition-colors">Pricing</a>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/auth" className="text-xs font-black uppercase tracking-widest text-white/80 hover:text-white transition-colors">Log In</Link>
-            <Link to="/auth" className="px-6 py-3 bg-white text-slate-950 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">Get Started</Link>
+            <Link to="/upload-resume" className="text-xs font-black uppercase tracking-widest text-white/80 hover:text-white transition-colors">Start Mock Interview</Link>
+            <Link to="/upload-resume" className="px-6 py-3 bg-white text-slate-950 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">Get Started</Link>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ function Home() {
             className="flex flex-wrap items-center justify-center gap-6 mb-20"
           >
             <button
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate("/upload-resume")}
               className="group relative px-10 py-6 bg-white text-slate-950 rounded-[2rem] font-black text-lg uppercase tracking-widest overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-indigo-500/20"
             >
               <span className="relative z-10 flex items-center gap-3">

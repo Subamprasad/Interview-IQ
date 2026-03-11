@@ -6,6 +6,7 @@ import apiClient from "../utils/apiClient";
 
 function UploadResume() {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [jobRole, setJobRole] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
@@ -24,12 +25,14 @@ function UploadResume() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file || !jobRole) return setError("All fields are required.");
+    if (!file || !jobRole || !username) return setError("All fields are required.");
 
     setLoading(true);
     const formData = new FormData();
     formData.append("resume", file);
     formData.append("jobRole", jobRole);
+    formData.append("name", username);
+    localStorage.setItem("user", JSON.stringify({ name: username, id: "anonymous_" + Date.now() }));
 
     try {
       const { data } = await apiClient.post("/api/interview/start", formData, {
@@ -53,8 +56,8 @@ function UploadResume() {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[120px] -z-10" />
 
-      <button onClick={() => navigate("/dashboard")} className="absolute top-10 left-10 inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-bold uppercase tracking-widest text-xs">
-        <FiArrowLeft /> Back to Dashboard
+      <button onClick={() => navigate("/")} className="absolute top-10 left-10 inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-bold uppercase tracking-widest text-xs">
+        <FiArrowLeft /> Back to Home
       </button>
 
       <motion.div
@@ -72,6 +75,20 @@ function UploadResume() {
           </header>
 
           <form onSubmit={handleSubmit} className="space-y-10">
+            <div>
+              <label className="block text-xs font-black text-slate-500 mb-4 uppercase tracking-[0.2em]">Your Name</label>
+              <div className="relative group">
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="e.g. John Doe"
+                  className="w-full pl-6 pr-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all font-bold text-lg"
+                  required
+                />
+              </div>
+            </div>
+
             <div>
               <label className="block text-xs font-black text-slate-500 mb-4 uppercase tracking-[0.2em]">Target Job Role</label>
               <div className="relative group">
@@ -149,7 +166,7 @@ function UploadResume() {
 
             <button
               type="submit"
-              disabled={loading || !file || !jobRole}
+              disabled={loading || !file || !jobRole || !username}
               className="w-full py-6 rounded-3xl bg-indigo-600 hover:bg-indigo-500 font-black text-xl disabled:opacity-50 transition-all shadow-2xl shadow-indigo-600/30 flex items-center justify-center gap-4 group overflow-hidden relative"
             >
               {loading ? (
